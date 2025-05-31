@@ -66,7 +66,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: ${{ matrix.rust }}
+          toolchain: nightly
           components: rustfmt, clippy
 
       - name: Install cargo-tarpaulin
@@ -91,7 +91,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: ${{ matrix.rust }}
+          toolchain: nightly
           components: rustfmt, clippy
 
       - name: Install cargo-mutants
