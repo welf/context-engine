@@ -1,0 +1,145 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        rust: [1.87.0, stable]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+          components: rustfmt, clippy
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ matrix.rust }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ matrix.rust }}-
+            ${{ runner.os }}-cargo-
+
+      - name: Check workspace
+        run: cargo check --workspace --all-targets
+
+      - name: Run tests
+        run: cargo test --workspace --all-targets
+
+      - name: Run doctests
+        run: cargo test --workspace --doc
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run clippy
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+  coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin
+
+      - name: Generate coverage report
+        run: cargo tarpaulin --workspace --out xml --output-dir coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: coverage/cobertura.xml
+          fail_ci_if_error: true
+
+  mutation-testing:
+    name: Mutation Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-mutants
+        run: cargo install cargo-mutants
+
+      - name: Run mutation tests
+        run: cargo mutants --in-place
+
+      - name: Check mutation test results
+        run: |
+          if [ -f mutants.out/outcomes.json ]; then
+            MISSED=$(jq '.missed' mutants.out/outcomes.json)
+            if [ "$MISSED" -gt 0 ]; then
+              echo "❌ $MISSED mutants missed by tests"
+              exit 1
+            else
+              echo "✅ All mutants caught by tests"
+            fi
+          fi
+
+  audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Run security audit
+        run: cargo audit
+
+      - name: Install cargo-deny
+        run: cargo install cargo-deny
+
+      - name: Run license and dependency check
+        run: cargo deny check
+
+  doc:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build documentation
+        run: cargo doc --workspace --no-deps --document-private-items
+
+      - name: Check for documentation warnings
+        run: cargo doc --workspace --no-deps --document-private-items 2>&1 | grep -E "(warning|error)" && exit 1 || exit 0
