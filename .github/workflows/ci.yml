@@ -26,7 +26,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: ${{ matrix.rust }}
+          toolchain: ${{ matrix.rust || 'nightly' }}
           components: rustfmt, clippy
 
       - name: Cache Cargo registry
