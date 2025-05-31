@@ -1,14 +1,11 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+//! Context Engine Core Library
+//!
+//! This crate provides the core functionality for the Context Engine,
+//! including MCP protocol implementation, LSP client integration,
+//! and symbol analysis capabilities.
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod error;
+pub mod types;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+// Re-export commonly used types
+// pub use error::ContextEngineError;

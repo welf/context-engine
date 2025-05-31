@@ -7,9 +7,41 @@ authors.workspace = true
 license.workspace = true
 repository.workspace = true
 homepage.workspace = true
-documentation.workspace = true
+documentation = "https://docs.rs/context-engine-core"
 keywords.workspace = true
 categories.workspace = true
 description = "Core functionality for the Context Engine"
 
 [dependencies]
+# Async runtime
+tokio = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+bincode = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Logging
+tracing = { workspace = true }
+
+# Utilities
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tokio-test = { workspace = true }
+tempfile = { workspace = true }
+pretty_assertions = { workspace = true }
+proptest = { workspace = true }
+arbitrary = { workspace = true }
+insta = { workspace = true }
+
+[features]
+default = []
+
+[lints]
+workspace = true
