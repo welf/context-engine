@@ -8,9 +8,11 @@
 //! 2. That each workspace member has its own Cargo.toml and a src/ directory,
 //!    ensuring member isolation.
 //! 3. That all member crates share a consistent Rust edition.
-//! 4. That each member crate's Cargo.toml inherits required metadata fields from the workspace
-//!    root:
-//!    name, version, edition, authors, documentation link, and license.
+//! 4. That each member crate's Cargo.toml inherits required metadata fields
+//!    from the workspace root: version, edition, authors, documentation
+//!    link, and license.
+//! 5. That the workspace root LICENSE file exists and it is the Apache-2.0 license.
+//! 6. That the workspace root rust-toolchain.toml specifies the Rust nightly channel.
 
 use std::fs;
 
@@ -115,6 +117,16 @@ fn test_workspace_metadata_consistency() {
         "Workspace should specify Rust 2024 edition"
     );
 
+    // Verify rust-toolchain.toml exists and contains nightly channel
+    let rust_toolchain = workspace_root.join("rust-toolchain.toml");
+    assert!(rust_toolchain.exists(), "rust-toolchain.toml should exist");
+    let toolchain_toml =
+        fs::read_to_string(rust_toolchain).expect("Should be able to read rust-toolchain.toml");
+    assert!(
+        toolchain_toml.contains("channel = \"nightly\""),
+        "rust-toolchain.toml should specify Rust nightly channel"
+    );
+
     // Verify authors are specified and correct
     assert!(
         workspace_toml.contains("authors = [\"Arthur Welf\"]"),
@@ -139,7 +151,7 @@ fn test_workspace_metadata_consistency() {
         "Workspace should have license Apache-2.0"
     );
 
-    // Verify documentation is specified and correct
+    // Verify documentation link is specified and correct
     assert!(
         workspace_toml.contains("documentation = \"https://docs.rs/context-engine\""),
         "Workspace documentation link should be specified and correct"
