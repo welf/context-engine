@@ -1,0 +1,15 @@
+[workspace]
+members = ["context-engine-core", "context-engine-server"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.87"
+authors = ["Arthur Welf"]
+license = "Apache-2.0"
+repository = "https://github.com/welf/context-engine"
+homepage = "https://github.com/welf/context-engine"
+documentation = "https://docs.rs/context-engine"
+keywords = ["mcp", "lsp", "context", "code-analysis", "ai", "ai-tools"]
+categories = ["development-tools", "text-processing"]

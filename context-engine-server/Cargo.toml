@@ -1,0 +1,21 @@
+[package]
+name = "context-engine-server"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "Context Engine MCP Server"
+
+[[bin]]
+name = "context-engine-server"
+path = "src/main.rs"
+
+[dependencies]
+# Internal dependencies
+context-engine-core = { path = "../context-engine-core" }
