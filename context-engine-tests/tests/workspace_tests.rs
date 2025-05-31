@@ -3,16 +3,18 @@
 //! Integration tests for validating the workspace structure and crate metadata
 //!
 //! This module verifies:
-//! 1. That the workspace root Cargo.toml exists and that the workspace properly lists both
-//!    the `context-engine-core` and `context-engine-server` members.
+//! 1. That the workspace root Cargo.toml exists and that the workspace properly
+//!    lists both the `context-engine-core` and `context-engine-server` members.
 //! 2. That each workspace member has its own Cargo.toml and a src/ directory,
 //!    ensuring member isolation.
 //! 3. That all member crates share a consistent Rust edition.
 //! 4. That each member crate's Cargo.toml inherits required metadata fields
-//!    from the workspace root: version, edition, authors, documentation
-//!    link, and license.
-//! 5. That the workspace root LICENSE file exists and it is the Apache-2.0 license.
-//! 6. That the workspace root rust-toolchain.toml specifies the Rust nightly channel.
+//!    from the workspace root: version, edition, authors, documentation link,
+//!    and license.
+//! 5. That the workspace root LICENSE file exists and it is the Apache-2.0
+//!    license.
+//! 6. That the workspace root rust-toolchain.toml specifies the Rust nightly
+//!    channel.
 
 use std::fs;
 
@@ -155,6 +157,16 @@ fn test_workspace_metadata_consistency() {
     assert!(
         workspace_toml.contains("documentation = \"https://docs.rs/context-engine\""),
         "Workspace documentation link should be specified and correct"
+    );
+
+    // Verify repository has a LICENSE file
+    let workspace_licence = fs::read_to_string(workspace_root.join("LICENSE"))
+        .expect("Should be able to read LICENSE file");
+
+    // Verify LICENSE file is Apache License version 2.0
+    assert!(
+        workspace_licence.contains("Apache License") && workspace_licence.contains("Version 2.0"),
+        "Workspace LICENSE file should contain Apache License version 2.0"
     );
 }
 

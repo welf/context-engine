@@ -1,0 +1,32 @@
+# Clippy configuration for Context Engine
+# Ensures high code quality and catches potential issues
+
+# MSRV compatibility
+msrv = "1.75.0"
+
+# Lint levels - be strict about code quality
+# Correctness lints (default: deny)
+# Style lints (default: warn)
+# Complexity lints (default: warn)
+# Performance lints (default: warn)
+# Pedantic lints (enabled selectively)
+
+# Additional lints to deny
+avoid-breaking-exported-api = true
+disallowed-types = [
+{ path = "std::sync::Mutex", reason = "prefer faster & simpler non-poisonable mutex", replacement = "parking_lot::Mutex" },
+{ path = "std::sync::RwLock", reason = "prefer faster RwLock", replacement = "parking_lot::RwLock::new" },
+]
+
+# Additional lints to warn
+warn-on-all-wildcard-imports = true
+
+# Allowed lints (use sparingly)
+# allow = [
+#     # Allow module inception for clear module organization
+#     "clippy::module_inception",
+# ]
+allowed-scripts = ["Latin"]
+
+# Cognitive complexity threshold
+cognitive-complexity-threshold = 15

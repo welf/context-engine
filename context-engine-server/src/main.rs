@@ -15,5 +15,5 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     info!("Starting Context Engine server");
 
     // TODO: Implement server initialization
-    todo!("Server implementation will be added in Phase 1")
+    Ok(())
 }

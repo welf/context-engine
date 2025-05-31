@@ -251,6 +251,7 @@ name = "context-engine-tests"
 version = "0.1.0"
 dependencies = [
  "serde_yaml",
+ "toml",
 ]
 
 [[package]]

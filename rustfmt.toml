@@ -1,0 +1,41 @@
+# Rustfmt configuration for Context Engine
+# Ensures consistent code formatting across the project
+
+edition = "2024"
+style_edition = "2024"
+
+# Imports
+imports_granularity = "Module"
+group_imports = "StdExternalCrate"
+reorder_imports = true
+
+# Formatting options
+max_width = 100
+hard_tabs = false
+tab_spaces = 4
+newline_style = "Unix"
+
+# Function and control flow formatting
+fn_single_line = false
+control_brace_style = "AlwaysSameLine"
+brace_style = "SameLineWhere"
+
+# String formatting
+format_strings = true
+format_macro_matchers = true
+
+# Comments and documentation
+comment_width = 80
+wrap_comments = true
+normalize_comments = true
+normalize_doc_attributes = true
+
+# Misc formatting
+remove_nested_parens = true
+reorder_impl_items = true
+reorder_modules = true
+type_punctuation_density = "Wide"
+use_small_heuristics = "Default"
+
+# Unstable features (requires nightly, but configuration is preserved)
+unstable_features = false

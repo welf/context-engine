@@ -4,8 +4,8 @@
 //! including MCP protocol implementation, LSP client integration,
 //! and symbol analysis capabilities.
 
-pub mod error;
-pub mod types;
+// pub mod error;
+// pub mod types;
 
 // Re-export commonly used types
 // pub use error::ContextEngineError;

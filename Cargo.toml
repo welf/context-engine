@@ -48,6 +48,14 @@ insta = { version = "1.43.1", features = ["ron"] }
 rust-2024-compatibility = "warn"
 missing_docs = "warn"
 unsafe_code = "forbid"
+redundant_imports = "forbid"
+# unused_crate_dependencies = "forbid"
+
+[workspace.lints.clippy]
+panic = "warn"
+unwrap_used = "warn"
+expect_used = "warn"
+indexing_slicing = "warn"
 
 [profile.dev]
 opt-level = 0

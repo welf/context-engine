@@ -1,4 +1,8 @@
 target/
 specs/
 
+.env*
+*.log
 .DS_Store
+
+!Cargo.lock
