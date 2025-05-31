@@ -12,13 +12,9 @@
 //!    root:
 //!    name, version, edition, authors, documentation link, and license.
 
-use std::{fs, path::Path};
+use std::fs;
 
-/// Returns the workspace root path.
-/// In our current setup, integration tests run with the workspace root as the working directory.
-fn workspace_root() -> &'static Path {
-    Path::new("..")
-}
+use context_engine_tests::helpers::workspace_root;
 
 #[test]
 fn test_workspace_structure_exists() {
