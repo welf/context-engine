@@ -13,7 +13,7 @@ reorder_imports = true
 max_width = 100
 hard_tabs = false
 tab_spaces = 4
-newline_style = "Unix"
+newline_style = "Auto"
 
 # Function and control flow formatting
 fn_single_line = false
