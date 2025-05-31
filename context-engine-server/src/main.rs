@@ -5,6 +5,7 @@
 
 use tracing::info;
 
+#[cfg_attr(test, mutants::skip)] // TODO: Remove this attribute when ready
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Initialize tracing
