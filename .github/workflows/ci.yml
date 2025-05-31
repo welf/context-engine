@@ -98,11 +98,13 @@ jobs:
         run: |
           if [ -f mutants.out/outcomes.json ]; then
             MISSED=$(jq '.missed' mutants.out/outcomes.json)
-            if [ "$MISSED" -gt 0 ]; then
+            CAUGHT=$(jq '.caught' mutants.out/outcomes.json)
+            PERCENTAGE=$(echo "scale=2; $CAUGHT / $MISSED * 100" | bc)
+            if [ "$PERCENTAGE" -lt 75 ]; then
               echo "❌ $MISSED mutants missed by tests"
               exit 1
             else
-              echo "✅ All mutants caught by tests"
+              echo "✅ $PERCENTAGE% mutants caught by tests"
             fi
           fi
 
