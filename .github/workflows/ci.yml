@@ -26,7 +26,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: ${{ matrix.rust || 'nightly' }}
+          toolchain: nightly
           components: rustfmt, clippy
 
       - name: Cache Cargo registry
@@ -36,9 +36,9 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             target
-          key: ${{ runner.os }}-cargo-${{ matrix.rust || 'nightly'}}-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-nightly-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-${{ matrix.rust || 'nightly'}}-
+            ${{ runner.os }}-cargo-nightly-
             ${{ runner.os }}-cargo-
 
       - name: Check workspace
