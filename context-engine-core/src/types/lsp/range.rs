@@ -78,7 +78,7 @@ pub trait RangeExt {
 
     /// Returns true if the range is empty.
     ///
-    /// The [`Range`](lsp_types::Range) is considered empty if its start and end
+    /// The [`Range`] is considered empty if its start and end
     /// positions are equal.
     ///
     /// # Returns
@@ -100,7 +100,7 @@ pub trait RangeExt {
     /// ```
     fn is_empty(&self) -> bool;
 
-    /// Creates a new [`Range`](lsp_types::Range), validating that start comes
+    /// Creates a new [`Range`], validating that start comes
     /// before end.
     ///
     /// This method ensures that the start position is before or equal to
