@@ -1,8 +1,9 @@
 #![allow(clippy::unwrap_used)]
 
-use super::*;
 use proptest::prelude::*;
 use serde_json::{from_str, to_string};
+
+use super::*;
 
 #[test]
 fn test_position_extension_methods() {

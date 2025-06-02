@@ -24,7 +24,8 @@ pub enum LocationError {
         reason: String,
     },
 
-    /// Error that occurs when a range's start position is after its end position
+    /// Error that occurs when a range's start position is after its end
+    /// position
     #[error("Invalid range: start position occurs after end position")]
     InvalidRange,
 
