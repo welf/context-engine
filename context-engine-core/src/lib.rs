@@ -5,7 +5,7 @@
 //! and symbol analysis capabilities.
 
 // pub mod error;
-// pub mod types;
+pub mod types;
 
 // Re-export commonly used types
 // pub use error::ContextEngineError;

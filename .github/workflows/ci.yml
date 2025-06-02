@@ -109,6 +109,8 @@ jobs:
             PERCENTAGE=$(echo "scale=2; $MISSED / $TOTAL * 100" | bc)
             if [ "$MISSED" -eq 0 ] && [ "$CAUGHT" -eq 0 ]; then
               echo "✅ No viable mutants found (both MISSED and CAUGHT are 0)"
+            elif [ "$MISSED" -eq 0 ] && [ "$CAUGHT" -gt 0 ]; then
+              echo "✅ All "$CAUGHT" mutants caught!"
             elif  [ "$(echo "$PERCENTAGE < 75" | bc -l)" -eq 1 ]; then
               echo "❌ $MISSED mutants ($PERCENTAGE%) missed by tests"
               exit 1
