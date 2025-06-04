@@ -54,9 +54,9 @@ pub trait LocationExt {
     /// # Examples
     ///
     /// ```
-    /// use context_engine_core::types::{Range, Position, Location, LocationExt};
+    /// use context_engine_core::types::{Range, Position, Location, LocationExt, RangeExt};
     ///
-    /// let range = Range::new(Position::new(10, 0), Position::new(10, 20));
+    /// let range = Range::validated(Position::new(10, 0), Position::new(10, 20)).unwrap();
     ///
     /// // Valid location
     /// let valid = Location::validated("file:///src/main.rs", range.clone());
@@ -80,13 +80,12 @@ pub trait LocationExt {
     /// # Examples
     ///
     /// ```
-    /// use context_engine_core::types::{Location, Uri, Range, Position, LocationExt};
+    /// use context_engine_core::types::{Location, Range, Position, LocationExt, RangeExt};
     /// use std::str::FromStr;
     ///
-    /// let location = Location::new(
-    ///     Uri::from_str("file:///src/main.rs").unwrap(),
-    ///     Range::new(Position::new(0, 0), Position::new(1, 0))
-    /// );
+    /// let range = Range::validated(Position::new(0, 0), Position::new(1, 0)).unwrap();
+    ///
+    /// let location = Location::validated("file:///src/main.rs", range).unwrap();
     ///
     /// assert_eq!(location.filename(), Some("main.rs".to_string()));
     /// ```

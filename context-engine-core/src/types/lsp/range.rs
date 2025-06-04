@@ -49,10 +49,10 @@ pub trait RangeExt {
     /// ```
     /// use context_engine_core::types::{Position, Range, RangeExt};
     ///
-    /// let range = Range::new(
+    /// let range = Range::validated(
     ///     Position::new(10, 5),   // Start position
     ///     Position::new(10, 20)   // End position
-    /// );
+    /// ).unwrap();
     ///
     /// // Position within range
     /// let within = Position::new(10, 10);
@@ -91,7 +91,10 @@ pub trait RangeExt {
     /// use context_engine_core::types::{Position, Range, RangeExt};
     ///
     /// // Empty range
-    /// let empty_range = Range::new(Position::new(10, 5), Position::new(10, 5));
+    /// let empty_range = Range::validated(
+    ///     Position::new(10, 5),
+    ///     Position::new(10, 5)
+    /// ).unwrap();
     /// assert!(empty_range.is_empty());
     ///
     /// // Non-empty range
@@ -152,9 +155,9 @@ pub trait RangeExt {
     /// ```
     /// use context_engine_core::types::{Position, Range, RangeExt};
     ///
-    /// let range = Range::new(Position::new(10, 5), Position::new(10, 20));
-    /// let contained = Range::new(Position::new(10, 10), Position::new(10, 15));
-    /// let not_contained = Range::new(Position::new(10, 10), Position::new(10, 25));
+    /// let range = Range::validated(Position::new(10, 5), Position::new(10, 20)).unwrap();
+    /// let contained = Range::validated(Position::new(10, 10), Position::new(10, 15)).unwrap();
+    /// let not_contained = Range::validated(Position::new(10, 10), Position::new(10, 25)).unwrap();
     ///
     /// assert!(range.contains_range(&contained));
     /// assert!(!range.contains_range(&not_contained));
