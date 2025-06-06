@@ -2,6 +2,31 @@
 
 # Context Engine
 
+<!--toc:start-->
+- [Context Engine](#context-engine)
+  - [The "Almost There" Problem](#the-almost-there-problem)
+  - [What Context Engine Actually Does](#what-context-engine-actually-does)
+    - [Complete Codebase Intelligence](#complete-codebase-intelligence)
+    - [Smart Context Delivery](#smart-context-delivery)
+    - [Real Dependencies, Real Versions](#real-dependencies-real-versions)
+    - [Patterns That Actually Work](#patterns-that-actually-work)
+  - [The North Star: First-Time-Right Code](#the-north-star-first-time-right-code)
+  - [Why This Approach Works](#why-this-approach-works)
+  - [How This Changes Everything](#how-this-changes-everything)
+    - [For Developers](#for-developers)
+    - [For Teams](#for-teams)
+    - [For Projects](#for-projects)
+  - [Architecture](#architecture)
+    - [Core Components](#core-components)
+    - [Key Technologies](#key-technologies)
+  - [Beyond Knowledge Graphs: Full IDE Capabilities](#beyond-knowledge-graphs-full-ide-capabilities)
+    - [Code Validation & Diagnostics](#code-validation-diagnostics)
+    - [Code Modification](#code-modification)
+    - [Impact Analysis](#impact-analysis)
+  - [Current Status](#current-status)
+  - [What AI Assistants Actually Think](#what-ai-assistants-actually-think)
+<!--toc:end-->
+
 **Turning AI coding assistants from "almost right" to "right the first time"**
 
 ## The "Almost There" Problem
